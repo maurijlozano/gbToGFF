@@ -1,5 +1,15 @@
 # gbToGFF: A script to extract features from NCBI genbank files to GFF file
+This script can be sued to convert gb files to GFF3, and to extract a list of features to GFF3. It can extract using a list of locus_tags or by size.
+The extraction by size will only extract features with _translation_ qualifier in the genbank file. Extracts proteins smaller than the specified value (-s --size).
 
+### Requirements
+BCBio and Biopython
+
+#### Installation of the required modules
+pip install bcbio-gff  
+pip install biopython  
+
+## Running the script
 
 ```
 ./gbToGFF.py 
@@ -24,40 +34,10 @@ options:
                         one locus tag on each line>
 ```
 
-# Testing for Roary
-S. meliloti genomes from strains 2011, AK83 and SM11 were used. `./gbToGFF.py -g *.gb -e` (Extraction size = 210, default)
-
 ```
 OUTPUT
 Extraction of features of less than 210 nucleotides.
-Processing 2011.gb...
-A total of 185 smORFs were extracted...
-Processing AK83.gb...
-A total of 314 smORFs were extracted...
-Processing SM11.gb...
-A total of 309 smORFs were extracted...
-```
-Roary was run with the following command: `roary -f roary_results *.gff `
-For SM2011, only 180 genes were assigned to groups.
-For SINME, 306 genes were assigned to groups.
-For SM11, 305 genes were assigned to groups.
-Missing 17 genes...
-Of the 185 genes for S. meliloti, some were annotated as partial, with only 161 having a translation field in features qualifiers.
-
-### Correction of the script
-Only the features with translation will be extracted.
-```
-OUTPUT
-Extraction of features of less than 210 nucleotides.
-Processing 2011.gb...
+Processing genome.gb...
 A total of 161 smORFs were extracted...
-Processing AK83.gb...
-A total of 261 smORFs were extracted...
-Processing SM11.gb...
-A total of 272 smORFs were extracted...
 ```
-Roary was run with the following command: `roary -f roary_results *.gff `
-For SM2011, 161 genes were assigned to groups.
-For SINME, 261 genes were assigned to groups.
-For SM11, 272 genes were assigned to groups.
-Great!!!!
+For testing roary was run with the following command: `roary -f output_folder *.gff`
